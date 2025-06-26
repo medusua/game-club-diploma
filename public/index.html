@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клуб Настольных Игр "Игротека"</title>
+    
+    <!-- Ссылки на внешние библиотеки -->
+    <link rel="stylesheet" href="https://bootswatch.com/5/slate/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    
+    <!-- Наш собственный файл стилей -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Анимированный фон (только для главной страницы) -->
+    <div id="main-page-particles" class="particle-container">
+        <!-- 20 div'ов для частиц... -->
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+    
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="main-navbar">
+        <div class="container">
+            <a class="navbar-brand fs-4 d-flex align-items-center" href="/">
+                <img src="/images/torch-animated.gif" alt="Анимированный факел" width="32" height="32" class="me-2">
+                ИГРОТЕКА
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/games.html"><i class="bi bi-boxes me-2"></i>Наши Игры</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/schedule.html"><i class="bi bi-calendar2-event-fill me-2"></i>Расписание игр</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/masters.html"><i class="bi bi-person-bounding-box me-2"></i>Наши мастера</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/booking.html"><i class="bi bi-bookmark-check-fill me-2"></i>Бронирование</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contacts.html"><i class="bi bi-pin-map-fill me-2"></i>Контакты</a></li>
+                </ul>
+                <div class="d-flex align-items-center" id="auth-container">
+                    <div id="guest-view">
+                        <a href="/login.html" class="btn btn-outline-warning me-2"><i class="bi bi-box-arrow-in-right me-1"></i>Вход</a>
+                        <a href="/register.html" class="btn btn-warning"><i class="bi bi-person-plus-fill me-1"></i>Регистрация</a>
+                    </div>
+                    <div id="user-view" class="d-none">
+                        <span class="navbar-text me-3"><i class="bi bi-person-circle me-2"></i><span id="user-greeting"></span></span>
+                        <button class="btn btn-outline-secondary" id="logout-button"><i class="bi bi-box-arrow-right me-1"></i>Выход</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Главный экран с видео -->
+    <header class="hero-section text-center">
+        <div class="hero-video-wrapper">
+            <video playsinline autoplay muted loop id="hero-video">
+                <source src="/video/oboyv2.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="container">
+            <h1 class="display-1">Твое приключение начинается здесь</h1>
+            <p class="lead fs-4 my-4">Огромная коллекция настольных игр, захватывающие партии в D&D и уютная атмосфера для друзей</p>
+            <a href="#main-content" class="btn btn-warning btn-lg mt-3">Узнать больше</a>
+        </div>
+    </header>
+
+    <!-- Основной контент страницы -->
+    <div class="container my-5" id="main-content">
+    
+        <!-- Три ключевые ссылки -->
+        <section id="cta-links" class="py-5">
+             <div class="row text-center">
+                <div class="col-lg-4 mb-4">
+                    <a href="/games.html" class="text-decoration-none">
+                        <div class="card cta-card p-4 h-100">
+                            <i class="bi bi-collection-fill fs-1 mb-3"></i>
+                            <h3>Наша Коллекция</h3>
+                            <p class="mb-0">Более 200 игр на любой вкус. Изучи наш каталог!</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 mb-4">
+                     <a href="/schedule.html" class="text-decoration-none">
+                        <div class="card cta-card p-4 h-100">
+                             <i class="bi bi-calendar-event-fill fs-1 mb-3"></i>
+                             <h3>Расписание D&D</h3>
+                             <p class="mb-0">Найди свою партию и запишись на ближайшую игру.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 mb-4">
+                     <a href="/booking.html" class="text-decoration-none">
+                        <div class="card cta-card p-4 h-100">
+                             <i class="bi bi-person-plus-fill fs-1 mb-3"></i>
+                             <h3>Бронь стола</h3>
+                             <p class="mb-0">Зарезервируй стол или целую комнату для своей компании.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- О клубе -->
+        <section id="about" class="py-5">
+            <h2 class="section-title">
+                <i class="bi bi-shield-check" style="font-size: 0.8em;"></i><br>
+                О НАШЕМ КЛУБЕ
+            </h2>
+            <div class="row align-items-center">
+                <div class="col-md-6"><img src="/images/ourclub.jpg" class="img-fluid rounded shadow" alt="Фото клуба"></div>
+                <div class="col-md-6">
+                    <h3>Место, где рождаются истории</h3>
+                    <p class="lead">"Игротека" — это не просто место, где играют в настолки. Это портал в другие миры, где каждый стол — это новая вселенная. Наша миссия — объединять людей через магию игры, создавать незабываемые воспоминания и быть центром настольной культуры в городе.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Преимущества -->
+        <section id="features" class="py-5 rounded-3">
+            <h2 class="section-title">НАШИ ПРЕИМУЩЕСТВА</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <i class="bi bi-dice-5-fill fs-1 text-warning"></i>
+                    <h4 class="mt-3">Огромная коллекция игр</h4>
+                    <p>От быстрых пати-геймов до эпических стратегий на много часов.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <i class="bi bi-shield-shaded fs-1 text-warning"></i>
+                    <h4 class="mt-3">Опытные мастера</h4>
+                    <p>Наши гейм-мастера помогут с выбором игры и объяснят правила.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <i class="bi bi-cup-hot-fill fs-1 text-warning"></i>
+                    <h4 class="mt-3">Уютная атмосфера</h4>
+                    <p>Безлимитный чай, ароматный кофе и вкусное печенье для наших гостей.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Тарифы -->
+        <section id="tariffs" class="py-5">
+            <h2 class="section-title">
+                <i class="bi bi-tags-fill" style="font-size: 0.8em;"></i><br>
+                ТАРИФЫ
+            </h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <!-- Тариф 1: Поминутный -->
+                <div class="col d-flex">
+                    <div class="tariff-card d-flex flex-column w-100">
+                        <h5>“ПОМИНУТНЫЙ”</h5>
+                        <p class="small text-white-50">Стандартный тариф антикафе</p>
+                        <ul class="list-unstyled small mb-4">
+                            <li><i class="bi bi-check-lg text-success me-2"></i>Безлимитные чай,кофе и печенья</li>
+                            <li><i class="bi bi-check-lg text-success me-2"></i>Настольные игры из общего шкафа</li>
+                            <li><i class="bi bi-check-lg text-success me-2"></i>Настольный футбол, X-Box</li>
+                        </ul>
+                        <div class="price text-end mt-auto">240₽/час, далее 4₽/мин<br><small>Стоп-чек 700₽ будни / 900₽ выходные</small></div>
+                    </div>
+                </div>
+                
+                <!-- Тариф 2: Дневная игротека -->
+                <div class="col d-flex">
+                    <div class="tariff-card d-flex flex-column w-100">
+                        <h5>“ДНЕВНАЯ ИГРОТЕКА”</h5>
+                        <p class="small text-white-50">Дневная потому что целый день!</p>
+                        <ul class="list-unstyled small mb-4">
+                            <li><i class="bi bi-check-lg text-success me-2"></i>Все преимущества тарифа “поминутный”</li>
+                            <li><i class="bi bi-plus-lg text-warning me-2"></i>Полная коллекция настольных игр</li>
+                            <li><i class="bi bi-plus-lg text-warning me-2"></i>Помощь мастеров (подберём игру)</li>
+                            <li><i class="bi bi-star-fill text-info me-2"></i>Каждая 10-я игротека - бесплатно</li>
+                        </ul>
+                        <div class="price text-end mt-auto">900 ₽<br><small>Сб-Вс, с 12.00 до 00.00</small></div>
+                    </div>
+                </div>
+                
+                <!-- Тариф 3: Вечерняя игротека -->
+                <div class="col d-flex">
+                    <div class="tariff-card d-flex flex-column w-100">
+                        <h5>“ВЕЧЕРНЯЯ ИГРОТЕКА”</h5>
+                        <p class="small text-white-50">Выпить кофе и поиграть вечерком</p>
+                        <ul class="list-unstyled small mb-4">
+                            <li><i class="bi bi-check-lg text-success me-2"></i>Все преимущества тарифа “поминутный”</li>
+                            <li><i class="bi bi-plus-lg text-warning me-2"></i>Полная коллекция настольных игр</li>
+                            <li><i class="bi bi-plus-lg text-warning me-2"></i>Помощь мастеров (подберём игру)</li>
+                            <li><i class="bi bi-star-fill text-info me-2"></i>Каждая 10-я игротека - бесплатно</li>
+                        </ul>
+                        <div class="price text-end mt-auto">700 ₽<br><small>Пн-Чт, с 18.00 до 00.00</small></div>
+                    </div>
+                </div>
+
+                <!-- Тариф 4: Ночная игротека -->
+                <div class="col d-flex">
+                    <div class="tariff-card d-flex flex-column w-100">
+                        <h5>“НОЧНАЯ ИГРОТЕКА”</h5>
+                        <p class="small text-white-50">12 часов настольных игр</p>
+                        <ul class="list-unstyled small mb-4">
+                            <li><i class="bi bi-check-lg text-success me-2"></i>Все преимущества тарифа “поминутный”</li>
+                            <li><i class="bi bi-plus-lg text-warning me-2"></i>Полная коллекция настольных игр</li>
+                            <li><i class="bi bi-plus-lg text-warning me-2"></i>Помощь мастеров (подберём игру)</li>
+                            <li><i class="bi bi-star-fill text-info me-2"></i>Каждая 10-я игротека - бесплатно</li>
+                        </ul>
+                        <div class="price text-end mt-auto">800 ₽ / 900 ₽<br><small>Пт / Сб, с 18.00 до 06.00</small></div>
+                    </div>
+                </div>
+                
+                <!-- Тариф 5: Субботний тариф -->
+                <div class="col d-flex">
+                    <div class="tariff-card d-flex flex-column w-100">
+                        <h5>“СУББОТНИЙ ТАРИФ”</h5>
+                        <p class="small text-white-50">18 часов игротеки! Это ли не счастье?</p>
+                        <ul class="list-unstyled small mb-4">
+                            <li><i class="bi bi-check-lg text-success me-2"></i>Все преимущества тарифа “поминутный”</li>
+                            <li><i class="bi bi-plus-lg text-warning me-2"></i>Полная коллекция настольных игр</li>
+                            <li><i class="bi bi-plus-lg text-warning me-2"></i>Помощь мастеров (подберём игру)</li>
+                            <li><i class="bi bi-star-fill text-info me-2"></i>Каждая 10-я игротека - бесплатно</li>
+                        </ul>
+                        <div class="price text-end mt-auto">1200 ₽<br><small>Только в Сб, с 12.00 до 06.00</small></div>
+                    </div>
+                </div>
+
+                <!-- Тариф 6: Абонементы -->
+                <div class="col d-flex">
+                    <div class="tariff-card d-flex flex-column w-100">
+                        <h5>“АБОНЕМЕНТЫ”</h5>
+                        <p class="small text-white-50">Для самых преданных гостей</p>
+                        <ul class="list-unstyled small mb-4">
+                            <li><strong>“Коворкинг”</strong> - Безлимитное посещение в будние дни (10.00-18.00)</li>
+                            <li class="mb-2"><strong>“Всё включено”</strong> - Безлимитное посещение в часы работы клуба</li>
+                        </ul>
+                        <div class="price text-end mt-auto">6000 ₽ / 8000 ₽<br><small>в месяц</small></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Галерея -->
+        <section id="gallery" class="py-5">
+            <h2 class="section-title">
+                <i class="bi bi-images" style="font-size: 0.8em;"></i><br>
+                ГАЛЕРЕЯ МИРОВ
+            </h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div id="photoCarousel" class="carousel slide shadow-lg rounded-3 overflow-hidden" data-bs-ride="carousel">
+                        
+                        <!-- Точки-индикаторы -->
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#photoCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#photoCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#photoCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#photoCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                            <button type="button" data-bs-target="#photoCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                            <button type="button" data-bs-target="#photoCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                            <button type="button" data-bs-target="#photoCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                            <button type="button" data-bs-target="#photoCarousel" data-bs-slide-to="7" aria-label="Slide 8"></button>
+                            <button type="button" data-bs-target="#photoCarousel" data-bs-slide-to="8"></button>
+                        </div>
+
+                        <!-- Слайды -->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a href="/images/rul1.webp" class="glightbox" data-gallery="main-gallery">
+                                    <img src="/images/rul1.webp" class="d-block w-100" alt="...">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="/images/rul2.webp" class="glightbox" data-gallery="main-gallery">
+                                    <img src="/images/rul2.webp" class="d-block w-100" alt="...">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="/images/rul3.webp" class="glightbox" data-gallery="main-gallery">
+                                    <img src="/images/rul3.webp" class="d-block w-100" alt="...">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="/images/rul4.webp" class="glightbox" data-gallery="main-gallery">
+                                    <img src="/images/rul4.webp" class="d-block w-100" alt="...">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="/images/rul5.webp" class="glightbox" data-gallery="main-gallery">
+                                    <img src="/images/rul5.webp" class="d-block w-100" alt="...">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="/images/rul6.webp" class="glightbox" data-gallery="main-gallery">
+                                    <img src="/images/rul6.webp" class="d-block w-100" alt="...">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="/images/rul7.webp" class="glightbox" data-gallery="main-gallery">
+                                    <img src="/images/rul7.webp" class="d-block w-100" alt="...">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="/images/rul8.webp" class="glightbox" data-gallery="main-gallery">
+                                    <img src="/images/rul8.webp" class="d-block w-100" alt="...">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="/images/rul9.webp" class="glightbox" data-gallery="main-gallery">
+                                    <img src="/images/rul9.webp" class="d-block w-100" alt="...">
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Стрелки управления -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#photoCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#photoCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Контакты на главной -->
+        <section id="main-contacts" class="py-5">
+            <div class="row text-center">
+                <!-- Левая колонка: Соцсети -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h5 class="mb-4">ПОДПИШИТЕСЬ НА НАС</h5>
+                    <p class="small mb-4">Чтобы быть в курсе новостей, террейнов и новинок настольных игр</p>
+                    <div>
+                        <a href="https://web.telegram.org" target="_blank" class="social-icon"><i class="bi bi-telegram fs-4"></i></a>
+                        <a href="https://youtube.com" target="_blank" class="social-icon"><i class="bi bi-youtube fs-4"></i></a>
+                        <a href="https://discord.com" target="_blank" class="social-icon"><i class="bi bi-discord fs-4"></i></a>
+                    </div>
+                </div>
+                <!-- Центральная колонка: Телефон и Адрес -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h5 class="mb-4">ТЕЛЕФОН</h5>
+                    <!-- Место для вставки телефона -->
+                    <p class="fs-4 mb-4"><a href="#" id="contact-phone" class="text-decoration-none">Загрузка...</a></p>
+                    <h5 class="mb-3">АДРЕС</h5>
+                    <!-- Место для вставки адреса -->
+                    <p id="contact-address">Загрузка...</p>
+                </div>
+                <!-- Правая колонка: Режим работы -->
+                <div class="col-lg-4">
+                    <h5 class="mb-4">РЕЖИМ РАБОТЫ</h5>
+                    <ul class="list-unstyled schedule-list">
+                        <li><span>ПН-ЧТ</span> <span>с 10 до 00</span></li>
+                        <li><span>ПТ</span> <span>с 10 до 06</span></li>
+                        <li><span>СБ</span> <span>с 12 до 06</span></li>
+                        <li><span>ВС</span> <span>с 12 до 00</span></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Карта -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div id="map-container-main" class="ratio ratio-16x9 rounded shadow">
+                        <!-- Сюда JS вставит карту -->
+                        <div class="d-flex h-100 align-items-center justify-content-center"><div class="spinner-border"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- МОДАЛЬНЫЕ ОКНА ДЛЯ ВХОДА/РЕГИСТРАЦИИ -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Вход</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                 <div id="login-alert-placeholder"></div>
+                 <form id="loginFormModal">
+                    <div class="mb-3"><label class="form-label">Телефон</label><input type="tel" id="loginPhone" class="form-control" required></div>
+                    <div class="mb-3"><label class="form-label">Пароль</label><input type="password" id="loginPassword" class="form-control" required></div>
+                    <button type="submit" class="btn btn-warning w-100">Войти</button>
+                </form>
+            </div>
+        </div></div>
+    </div>
+    <div class="modal fade" id="registerModal" tabindex="-1">
+         <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Регистрация</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <div id="register-alert-placeholder"></div>
+                <form id="registerFormModal">
+                    <div class="mb-3"><label class="form-label">Имя</label><input type="text" id="registerName" class="form-control" required></div>
+                    <div class="mb-3"><label class="form-label">Телефон</label><input type="tel" id="registerPhone" class="form-control" required></div>
+                    <div class="mb-3"><label class="form-label">Пароль (мин. 6 симв.)</label><input type="password" id="registerPassword" class="form-control" required></div>
+                    <button type="submit" class="btn btn-warning w-100">Зарегистрироваться</button>
+                </form>
+            </div>
+        </div></div>
+    </div>
+    
+    <!-- Футер и модальные окна -->
+    <footer class="text-center py-4">
+        <p class="mb-0 text-muted">© 2024 Клуб "Игротека". Создано для защиты диплома.</p>
+    </footer>
+
+    <!-- СКРИПТЫ -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/main-page.js"></script>
+    <script>
+        // Скрипт для плавного появления частиц при скролле
+        document.addEventListener('DOMContentLoaded', () => {
+            const particleContainer = document.getElementById('main-page-particles');
+            const heroSection = document.querySelector('.hero-section');
+
+            if (particleContainer && heroSection) {
+                const heroHeight = heroSection.offsetHeight;
+
+                window.addEventListener('scroll', () => {
+                    // Если пользователь проскроллил дальше, чем половина высоты главного экрана
+                    if (window.scrollY > heroHeight * 0.5) {
+                        particleContainer.classList.add('is-visible');
+                    } else {
+                        particleContainer.classList.remove('is-visible');
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+</body>
+</html>

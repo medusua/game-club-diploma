@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бронирование - Игротека</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/slate/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="particle-container">
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+    </div>
+    <script>
+        // Этот скрипт "разбрасывает" искорки по экрану при каждой загрузке страницы
+        document.querySelectorAll('.particle').forEach(particle => {
+            // Случайное положение по горизонтали
+            particle.style.left = `${Math.random() * 100}%`;
+            // Случайное положение по вертикали
+            particle.style.top = `${Math.random() * 100}%`;
+            // Случайная задержка (отрицательная, чтобы анимация началась "из середины")
+            particle.style.animationDelay = `-${Math.random() * 20}s`;
+        });
+    </script>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="main-navbar">
+        <div class="container">
+            <a class="navbar-brand fs-4 d-flex align-items-center" href="/">
+                <img src="/images/torch-animated.gif" alt="Анимированный факел" width="32" height="32" class="me-2">
+                ИГРОТЕКА
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/games.html"><i class="bi bi-boxes me-2"></i>Наши Игры</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/schedule.html"><i class="bi bi-calendar2-event-fill me-2"></i>Расписание Игр</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/masters.html"><i class="bi bi-person-bounding-box me-2"></i>Наши мастера</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/booking.html"><i class="bi bi-bookmark-check-fill me-2"></i>Бронирование</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contacts.html"><i class="bi bi-pin-map-fill me-2"></i>Контакты</a></li>
+                </ul>
+                <div class="d-flex align-items-center" id="auth-container">
+                    <div id="guest-view">
+                        <a href="/login.html" class="btn btn-outline-warning me-2"><i class="bi bi-box-arrow-in-right me-1"></i>Вход</a>
+                        <a href="/register.html" class="btn btn-warning"><i class="bi bi-person-plus-fill me-1"></i>Регистрация</a>
+                    </div>
+                    <div id="user-view" class="d-none">
+                        <span class="navbar-text me-3"><i class="bi bi-person-circle me-2"></i><span id="user-greeting"></span></span>
+                        <button class="btn btn-outline-secondary" id="logout-button"><i class="bi bi-box-arrow-right me-1"></i>Выход</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-4 body-content">
+        <header>
+            <h1>Бронирование для D&D и других игр</h1>
+            <p class="lead">Вы можете забронировать отдельный стол или целую комнату для вашей кампании.</p>
+        </header>
+
+        <!--  блок с ценами  -->
+        <section id="booking-prices" class="my-5">
+            <h2 class="text-center mb-4">Стоимость аренды</h2>
+            <div class="row">
+                <!-- Малый стол -->
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header text-center">
+                            <h4><i class="bi bi-person-fill me-2"></i>Малый стол</h4>
+                            <p class="mb-0">(до 4-х игроков + ваш мастер)</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between"><span>Будни утро (до 17:30)</span> <strong>2 400 ₽</strong></li>
+                            <li class="list-group-item d-flex justify-content-between"><span>Будни вечер (c 17:30)</span> <strong>3 400 ₽</strong></li>
+                            <li class="list-group-item d-flex justify-content-between"><span>Выходные утро/вечер</span> <strong>4 400 ₽</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Большой стол -->
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header text-center">
+                            <h4><i class="bi bi-person-video2 me-2"></i>Большой стол</h4>
+                            <p class="mb-0">(от 5-ти игроков + ваш мастер)</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between"><span>Будни утро (до 17:30)</span> <strong>3 000 ₽</strong></li>
+                            <li class="list-group-item d-flex justify-content-between"><span>Будни вечер (c 17:30)</span> <strong>4 250 ₽</strong></li>
+                            <li class="list-group-item d-flex justify-content-between"><span>Выходные утро/вечер</span> <strong>5 500 ₽</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Комната -->
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header text-center">
+                            <h4><i class="bi bi-door-closed-fill me-2"></i>Комната</h4>
+                            <p class="mb-0">(от 5-ти игроков + ваш мастер)</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between"><span>Будни утро (до 17:30)</span> <strong>3 600 ₽</strong></li>
+                            <li class="list-group-item d-flex justify-content-between"><span>Будни вечер (c 17:30)</span> <strong>5 100 ₽</strong></li>
+                            <li class="list-group-item d-flex justify-content-between"><span>Выходные утро/вечер</span> <strong>6 600 ₽</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <main class="text-center my-5">
+            <button class="btn btn-primary btn-lg px-5 py-3" id="startBookingBtn">
+                <i class="bi bi-calendar-check-fill me-2"></i> Забронировать сейчас
+            </button>
+        </main>
+        
+        <section id="booking-gallery" class="py-5">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room1.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room1.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото комнаты 1">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room2.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room2.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото комнаты 2">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room3.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room3.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото стола 1">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room4.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room4.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото комнаты 1">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room6.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room6.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото стола 1">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room7.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room7.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото комнаты 1">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room8.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room8.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото комнаты 2">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room9.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room9.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото стола 1">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room10.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room10.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото комнаты 1">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room11.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room11.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото комнаты 2">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room12.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room12.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото стола 1">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room13.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room13.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото комнаты 1">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room14.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room14.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото комнаты 2">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/images/room15.webp" class="glightbox" data-gallery="booking-gallery">
+                        <img src="/images/room15.webp" class="img-fluid rounded shadow-sm booking-gallery-image" alt="Фото стола 1">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="modal fade" id="loginModal" tabindex="-1">
+            <div class="modal-dialog"><div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title">Вход</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <div id="login-alert-placeholder"></div>
+                    <form id="loginFormModal">
+                        <div class="mb-3"><label class="form-label">Телефон</label><input type="tel" id="loginPhone" class="form-control" required></div>
+                        <div class="mb-3"><label class="form-label">Пароль</label><input type="password" id="loginPassword" class="form-control" required></div>
+                        <button type="submit" class="btn btn-warning w-100">Войти</button>
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <div class="modal fade" id="registerModal" tabindex="-1">
+            <div class="modal-dialog"><div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title">Регистрация</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <div id="register-alert-placeholder"></div>
+                    <form id="registerFormModal">
+                        <div class="mb-3"><label class="form-label">Имя</label><input type="text" id="registerName" class="form-control" required></div>
+                        <div class="mb-3"><label class="form-label">Телефон</label><input type="tel" id="registerPhone" class="form-control" required></div>
+                        <div class="mb-3"><label class="form-label">Пароль (мин. 6 симв.)</label><input type="password" id="registerPassword" class="form-control" required></div>
+                        <button type="submit" class="btn btn-warning w-100">Зарегистрироваться</button>
+                    </form>
+                </div>
+            </div></div>
+        </div>
+
+        <footer class="text-center mt-5 py-3">
+            <p>© 2024 Клуб "Игротека". Все права защищены.</p>
+        </footer>
+    </div>
+
+    <div class="modal fade" id="guestBookingModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title">Требуется вход</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body"><p>Чтобы забронировать стол, пожалуйста, войдите в свой аккаунт или зарегистрируйтесь.</p></div>
+                <div class="modal-footer">
+                    <a href="#" data-action="open-login" class="btn btn-primary">Войти</a>
+                    <a href="#" data-action="open-register" class="btn btn-warning">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Многошаговое модальное окно для БРОНИРОВАНИЯ -->
+    <div class="modal fade" id="bookingProcessModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalTitle">Шаг 1: Выберите место</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Контейнер для сообщений -->
+                    <div id="booking-alert-placeholder-modal"></div>
+
+                    <!-- ШАГ 1: ВЫБОР МЕСТА -->
+                    <div id="step1">
+                        <p>Что вы хотите забронировать?</p>
+                        <div class="list-group">
+                            <button type="button" class="list-group-item list-group-item-action" data-booking-choice="Малый стол"><b>Малый стол</b> (до 4-х игроков)</button>
+                            <button type="button" class="list-group-item list-group-item-action" data-booking-choice="Большой стол"><b>Большой стол</b> (от 5-ти игроков)</button>
+                            <button type="button" class="list-group-item list-group-item-action" data-booking-choice="Комната"><b>Комната</b> (от 5-ти игроков)</button>
+                        </div>
+                    </div>
+
+                    <!-- ШАГ 2: ВЫБОР ТАРИФА/ВРЕМЕНИ -->
+                    <div id="step2" class="d-none">
+                        <p>Вы выбрали: <b id="choice-recap"></b>. Теперь выберите время:</p>
+                        <div class="list-group" id="time-options-container">
+                            <!-- Опции будут добавлены динамически -->
+                        </div>
+                    </div>
+
+                    <!-- ШАГ 3: ФИНАЛЬНЫЕ ДАННЫЕ -->
+                    <div id="step3" class="d-none">
+                        <p>Почти готово! Проверьте данные и выберите дату.</p>
+                        <form id="finalBookingForm">
+                            <div class="mb-3">
+                                <label class="form-label">Ваше бронирование:</label>
+                                <input type="text" id="final-choice-recap" class="form-control" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Имя:</label>
+                                <input type="text" id="final-booker-name" class="form-control" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="final-booking-date" class="form-label">Дата:</label>
+                                <input type="date" class="form-control" id="final-booking-date" required>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="back-button" class="d-none">Назад</button>
+                    <button type="button" class="btn btn-primary" id="submit-booking-button" class="d-none">Забронировать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/booking.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+</body>
+</html>
