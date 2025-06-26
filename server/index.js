@@ -8,7 +8,7 @@ const jwt =require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const DB_PATH = path.join(__dirname, 'db.json');
 const JWT_SECRET = 'super_secret_key_for_diploma'; // В реальном проекте выносится в переменные окружения (.env)
 
