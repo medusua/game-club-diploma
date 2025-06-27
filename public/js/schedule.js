@@ -1,10 +1,10 @@
-// public/js/schedule.js (ФИНАЛЬНАЯ ВЕРСИЯ С ИСПРАВЛЕННОЙ ОШИБКОЙ)
+// public/js/schedule.js (ФИНАЛЬНАЯ ЕДИНАЯ ВЕРСИЯ)
 
 document.addEventListener('authChecked', async () => {
     const container = document.getElementById('schedule-container');
     if (!container) return;
 
-    // Инициализируем модальные окна и другие элементы
+    // --- Инициализация всех необходимых элементов ---
     const bookingModalElement = document.getElementById('bookingModal');
     const bookingModal = bookingModalElement ? new bootstrap.Modal(bookingModalElement) : null;
     const guestModalElement = document.getElementById('guestModal');
@@ -12,6 +12,16 @@ document.addEventListener('authChecked', async () => {
     const eventIdInput = document.getElementById('eventIdInput');
     const bookingForm = document.getElementById('bookingForm');
     const modalAlertPlaceholder = document.getElementById('modal-alert-placeholder');
+
+    // --- Локальная функция для показа уведомлений в модальном окне ---
+    const showAlert = (message, type = 'success') => {
+        if (modalAlertPlaceholder) {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert">${message}</div>`;
+            modalAlertPlaceholder.innerHTML = '';
+            modalAlertPlaceholder.append(wrapper);
+        }
+    };
 
     try {
         const [eventsRes, mastersRes] = await Promise.all([
@@ -42,50 +52,48 @@ document.addEventListener('authChecked', async () => {
             
             const badgeClass = event.available_slots > 0 ? 'bg-success' : 'bg-danger';
             const badgeText = event.available_slots > 0 ? `Свободно: ${event.available_slots} из ${event.total_slots}` : 'Мест нет';
-            
-            // *** ИСПРАВЛЕНИЕ ЗДЕСЬ: Добавлена эта строка ***
             const buttonText = event.available_slots > 0 ? 'Записаться' : 'Мест нет';
 
+            // *** ИСПОЛЬЗУЕМ ВАШ ПРАВИЛЬНЫЙ, ОДОБРЕННЫЙ HTML-ШАБЛОН ***
             const eventCardHtml = `
-                <div class="col">
-                    <div class="card h-100 text-center p-3">
-                        <!-- Контейнер для иконки игры -->
-                        <div class="schedule-card-image-wrapper">
-                            <img src="${event.game_image}" alt="${event.game_title}">
-                        </div>
+            <div class="col">
+                <div class="card h-100 text-center p-3">
+                    <div class="schedule-card-image-wrapper">
+                        <img src="${event.game_image}" alt="${event.game_title}">
+                    </div>
+                    
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">${event.game_title}</h5>
+                        <p class="card-text small text-white-50 flex-grow-1">${event.description}</p>
                         
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">${event.game_title}</h5>
-                            <p class="card-text small text-white-50 flex-grow-1">${event.description}</p>
-                            
-                            <ul class="list-unstyled small text-white-50 my-3">
-                                <li class="mb-1"><i class="bi bi-calendar-check me-2"></i>${eventDate}</li>
-                                <li><i class="bi bi-clock me-2"></i>${event.time}</li>
-                            </ul>
-                            
-                            <div class="mt-auto">
-                                <div class="d-flex align-items-center justify-content-center mb-3">
-                                    <img src="${master.image}" class="rounded-circle me-2" width="40" height="40" alt="${master.name}" style="object-fit: cover; border: 2px solid var(--theme-border);">
-                                    <div>
-                                        <div class="small text-white-50">Мастер</div>
-                                        <div class="fw-bold">${master.name}</div>
-                                    </div>
+                        <ul class="list-unstyled small text-white-50 my-3">
+                            <li class="mb-1"><i class="bi bi-calendar-check me-2"></i>${eventDate}</li>
+                            <li><i class="bi bi-clock me-2"></i>${event.time}</li>
+                        </ul>
+                        
+                        <div class="mt-auto">
+                            <div class="d-flex align-items-center justify-content-center mb-3">
+                                <img src="${master.image}" class="rounded-circle me-2" width="40" height="40" alt="${master.name}" style="object-fit: cover; border: 2px solid var(--theme-border);">
+                                <div>
+                                    <div class="small text-white-50">Мастер</div>
+                                    <div class="fw-bold">${master.name}</div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="badge ${badgeClass} fs-6">${badgeText}</span>
-                                    <button type="button" class="btn btn-warning btn-sm book-btn" data-event-id="${event.id}" ${event.available_slots <= 0 ? 'disabled' : ''}>${buttonText}</button>
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge ${badgeClass} fs-6" id="slots-count-${event.id}">${badgeText}</span>
+                                <button type="button" class="btn btn-warning btn-sm book-btn" data-event-id="${event.id}" ${event.available_slots <= 0 ? 'disabled' : ''}>${buttonText}</button>
                             </div>
                         </div>
                     </div>
-                </div>`;
-                container.insertAdjacentHTML('beforeend', eventCardHtml);
-            });
-        } catch (error) {
-            container.innerHTML = `<div class="alert alert-danger col-12">${error.message}</div>`;
-        }
+                </div>
+            </div>`;
+            container.insertAdjacentHTML('beforeend', eventCardHtml);
+        });
+    } catch (error) {
+        container.innerHTML = `<div class="alert alert-danger col-12">${error.message}</div>`;
+    }
     
-    // --- Логика для модальных окон (остается без изменений) ---
+    // --- Логика для модальных окон (с работающим обновлением UI) ---
     container.addEventListener('click', (e) => {
         if (e.target.classList.contains('book-btn')) {
             if (window.authState.loggedIn) {
@@ -113,9 +121,9 @@ document.addEventListener('authChecked', async () => {
                 if (!response.ok) { const result = await response.json(); throw new Error(result.message); }
                 const result = await response.json();
                 
-                // Используем showAlert, который мы определили в auth.js
-                showAlert('modal-alert-placeholder', `Вы успешно записаны, ${window.authState.user.name}!`, 'success');
+                showAlert(`Вы успешно записаны, ${window.authState.user.name}!`, 'success');
                 
+                // *** ВОССТАНОВЛЕННАЯ И РАБОТАЮЩАЯ ЛОГИКА ОБНОВЛЕНИЯ ***
                 const updatedEvent = result.event;
                 const slotsCountElement = document.getElementById(`slots-count-${updatedEvent.id}`);
                 const buttonElement = document.querySelector(`.book-btn[data-event-id="${updatedEvent.id}"]`);
@@ -131,12 +139,11 @@ document.addEventListener('authChecked', async () => {
                     buttonElement.disabled = true;
                     buttonElement.textContent = 'Мест нет';
                 }
-
+                
                 setTimeout(() => bookingModal.hide(), 2000);
             } catch (error) {
-                showAlert('modal-alert-placeholder', error.message, 'danger');
+                showAlert(error.message, 'danger');
             }
         });
     }
 });
-
