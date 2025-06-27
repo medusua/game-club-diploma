@@ -29,7 +29,7 @@ a:hover { color: #f0b980; }
 
 /* 4. Исправления и улучшения компонентов */
 .card-header { background-color: var(--theme-bg) !important; border-bottom: 1px solid var(--theme-border) !important; }
-.card-img-top { width: 100%; /* Занимает всю ширину карточки */ height: 450px; /* Фиксированная высота для всех картинок */ object-fit: cover; }
+.card-img-top { width: 100%; /* Занимает всю ширину карточки */ height: 300px; /* Фиксированная высота для всех картинок */ object-fit: cover; }
 .card-footer { background-color: #433e39; }
 .tariff-card { background-color: var(--theme-surface); border: 1px solid var(--theme-border); padding: 1.5rem; height: 100%; transition: transform 0.3s, box-shadow 0.3s; }
 .tariff-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
@@ -99,3 +99,34 @@ a:hover { color: #f0b980; }
 .booking-gallery-image { transition: transform 0.3s ease, box-shadow 0.2s ease; cursor: pointer; }
 .booking-gallery-image:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(0,0,0,0.4); z-index: 10; }
 
+/* --- Адаптивные стили для карточки расписания --- */
+.schedule-card-img {
+    width: 100%; /* На мобильных (по умолчанию) картинка занимает всю ширину */
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Начиная со средних экранов (md) и больше */
+@media (min-width: 768px) {
+    .schedule-card-img {
+        width: 40%; /* На десктопе картинка занимает 40% ширины карточки */
+        height: auto; /* Высота подстраивается автоматически */
+    }
+}
+
+/* --- Стили для карточки расписания --- */
+.schedule-card-image-wrapper {
+    width: 150px; /* Фиксированная ширина контейнера для иконки */
+    height: 150px;
+    margin: 0 auto 1rem; /* Центрируем блок и добавляем отступ снизу */
+    border-radius: 50%; /* Делаем его круглым */
+    overflow: hidden; /* Обрезаем все, что выходит за круг */
+    border: 3px solid var(--theme-border);
+    flex-shrink: 0; /* Запрещаем блоку сжиматься */
+}
+
+.schedule-card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Масштабируем картинку, чтобы она заполнила круг */
+}
