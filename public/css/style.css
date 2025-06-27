@@ -34,7 +34,7 @@ a:hover { color: #f0b980; }
 .tariff-card { background-color: var(--theme-surface); border: 1px solid var(--theme-border); padding: 1.5rem; height: 100%; transition: transform 0.3s, box-shadow 0.3s; }
 .tariff-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
 .tariff-card h5 { color: var(--theme-accent); }
-.tariff-card .price { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: bold; color: var(--theme-text); margin-top: auto; /* Прижимает цену к низу карточки */ }
+.tariff-card .price { font-family: 'Merriweather', serif; font-size: 1.5rem; font-weight: bold; color: var(--theme-text); margin-top: auto; /* Прижимает цену к низу карточки */ }
 .btn:disabled { background-color: var(--theme-border) !important; border-color: var(--theme-border) !important; color: rgba(255, 252, 242, 0.5) !important; cursor: not-allowed; }
 .badge.bg-success { background-color: var(--theme-muted-green) !important; color: var(--theme-text) !important; }
 #filter-container .btn.active { background-color: var(--theme-accent); color: #000; }
